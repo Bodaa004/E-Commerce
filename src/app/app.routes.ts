@@ -83,17 +83,17 @@ export const routes: Routes = [
           import('./pages/checkout/checkout.component').then(
             (m) => m.CheckoutComponent
           ),
-        title: 'checkout',
-       // Add getPrerenderParams function here
-       data: {
-        prerender: {
-          getPrerenderParams: () => {
-            // Return an array of objects with the possible values for :id
-            return [{ id: '1' }, { id: '2' }, { id: '3' }]; // Example values
+        title: 'Checkout',
+        data: {
+          prerender: {
+            getPrerenderParams: () => {
+              // Return an array of objects with the possible values for :id
+              return [{ id: '1' }, { id: '2' }, { id: '3' }]; // Example values
+            },
           },
         },
       },
-    },      {
+      {
         path: 'details/:id',
         loadComponent: () =>
           import('./pages/details/details.component').then(
