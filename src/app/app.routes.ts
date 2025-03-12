@@ -84,9 +84,16 @@ export const routes: Routes = [
             (m) => m.CheckoutComponent
           ),
         title: 'checkout',
-        data: { renderMode: 'client-only' }
+       // Add getPrerenderParams function here
+       data: {
+        prerender: {
+          getPrerenderParams: () => {
+            // Return an array of objects with the possible values for :id
+            return [{ id: '1' }, { id: '2' }, { id: '3' }]; // Example values
+          },
+        },
       },
-      {
+    },      {
         path: 'details/:id',
         loadComponent: () =>
           import('./pages/details/details.component').then(
