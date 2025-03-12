@@ -1,0 +1,70 @@
+@if (cartDetails.totalCartPrice) {
+<section class="bg-gray-50 rounded border shadow p-4 w-[75%] mx-auto">
+  <h1 class="text-3xl mb-8 text-green-600">Shop Cart</h1>
+  <div class="flex items-center justify-between">
+    <span class="text-green-600"
+      >Total Cart Price:
+      {{ cartDetails.totalCartPrice | currency : "GBP" }}</span
+    >
+
+    <button
+    (click)="clearItems()"
+      class="bg-red-600 hover:bg-red-800 text-white py-2 px-10 border rounded"
+    >
+      Clear Cart
+    </button>
+  </div>
+
+  @for (product of cartDetails.products; track product.product.id) {
+  <div class="grid md:grid-cols-[10%_minmax(0,1fr)] border-b mb-2">
+    <div>
+      <img
+        [src]="product.product.imageCover"
+        class="w-full object-contain"
+        [alt]="product.product.title"
+      />
+    </div>
+
+    <div class="flex justify-between items-center">
+      <div>
+        <h3>{{ product.product.title }}</h3>
+        <h4>price : {{ product.price | currency : "GBP" }}</h4>
+        <button (click)="removeProduct(product.product.id)">
+          <i class="fas fa-trash-can text-green-600"></i>
+          Remove
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="text-green-600 text-3xl"
+          (click)="updateProduct(product.product.id, product.count + 1)"
+        >
+          <i class="fa-regular fa-square-plus"></i>
+        </button>
+        <span>{{ product.count }}</span>
+        <button
+          class="text-green-600 text-3xl"
+          (click)="updateProduct(product.product.id, product.count - 1)"
+        >
+          <i class="fa-regular fa-square-minus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+
+  <button
+    [routerLink]="['/checkout', cartDetails._id]"
+    class="bg-green-600 hover:bg-green-800 text-white py-2 px-10 border rounded"
+  >
+    CheckOut
+  </button>
+</section>
+
+} @else {
+<section class="bg-gray-50 rounded border shadow p-4 w-[75%] mx-auto">
+  <h1 class="text-3xl mb-8 text-green-600">Shop Cart</h1>
+  <h1 class="text-xl mb-8">Cart is Empty</h1>
+</section>
+
+}

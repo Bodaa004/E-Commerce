@@ -1,0 +1,44 @@
+@if (detailsProduct) {
+  <section class="p-6">
+    <h1 class="text-3xl font-light text-center text-green-600 my-3">Details Product</h1>
+    <div class="items-center grid md:grid-cols-[30%_minmax(0,1fr)] gap-6">
+      
+      <!-- Product Image Section -->
+      <div>
+        <img [src]="selectedImage || detailsProduct.imageCover" 
+             class="w-full rounded-lg shadow-md transition-opacity duration-300 opacity-0"
+             (load)="imageLoaded = true"
+             [class.opacity-100]="imageLoaded"
+             [alt]="detailsProduct.title"/>
+
+        <!-- Additional Images -->
+        <div class="flex gap-2 mt-4">
+          @for (image of detailsProduct.images; track image) {
+            <img [src]="image" 
+                 class="w-16 h-16 rounded-md cursor-pointer border border-gray-300 hover:border-green-600 transition-transform hover:scale-105" 
+                 (click)="changeImage(image)" 
+                 [alt]="detailsProduct.title"/>
+          }
+        </div>
+      </div>
+
+      <!-- Product Details -->
+      <div class="space-y-4">
+        <h2 class="text-2xl font-bold text-gray-800">{{ detailsProduct.title }}</h2>
+        <p class="text-gray-600">{{ detailsProduct.description }}</p>
+        <h3 class="text-lg font-semibold text-green-600"> {{ detailsProduct.category.name }} </h3>
+        <div class="flex justify-between items-center">
+          <span class="text-xl font-semibold text-gray-900">${{ detailsProduct.price }}</span>
+          <div class="flex items-center gap-1">
+            <i class="fas fa-star text-yellow-400"></i>
+            <span class="text-gray-500 text-sm">{{ detailsProduct.ratingsAverage }}</span>
+          </div>
+        </div>
+        <button class="bg-green-600 hover:bg-green-800 text-white py-3 px-6 rounded-lg w-full transition duration-300 shadow-md">
+          Add To Cart
+        </button>
+      </div>
+
+    </div>
+  </section>
+}

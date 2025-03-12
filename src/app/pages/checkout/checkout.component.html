@@ -1,0 +1,54 @@
+<section>
+  <h1 class="text-3xl font-light text-center text-green-600">Check Out!</h1>
+  <form [formGroup]="checkOutForm" (ngSubmit)="submitCheckOut()">
+    <!-- Address Details -->
+    <div class="mb-4">
+      <label class="block text-gray-600 text-sm font-medium"
+        >Address Details</label
+      >
+      <textarea
+      formControlName="details"
+      class="w-full px-4 py-2 border rounded-lg placeholder:text-gray-500 focus:outline-none focus:border-green-500 resize-none"
+      placeholder="Enter your address"
+      rows="3"
+      >
+    </textarea>
+        </div>
+
+    <!-- Phone Number -->
+    <div class="mb-4">
+      <label class="block text-gray-600 text-sm font-medium"
+        >Phone Number</label
+      >
+      <input
+        type="text"
+        formControlName="phone"
+        class="w-full px-4 py-2 border rounded-lg placeholder:text-gray-500 focus:outline-none focus:border-green-500"
+        placeholder="01XXXXXXXXX"
+      />
+    </div>
+
+    <!-- City -->
+    <div class="mb-4">
+      <label class="block text-gray-600 text-sm font-medium">City</label>
+      <select
+        formControlName="city"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500"
+      >
+        <option value="" disabled selected>Select your city</option>
+        <option value="Cairo">Cairo</option>
+        <option value="Alexandria">Alexandria</option>
+        <option value="Giza">Giza</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      [disabled]="checkOutForm.invalid"
+      class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full disabled:bg-gray-700"
+    >
+      Place Order
+    </button>
+  </form>
+</section>
