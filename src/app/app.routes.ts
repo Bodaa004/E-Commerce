@@ -84,7 +84,7 @@ export const routes: Routes = [
             (m) => m.CheckoutComponent
           ),
         title: 'checkout',
-        data: { renderMode: 'no-prerender' }
+        data: { renderMode: 'client-only' }
       },
       {
         path: 'details/:id',
