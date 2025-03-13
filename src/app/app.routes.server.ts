@@ -6,6 +6,10 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client, // Disable prerendering for this route
   },
   {
+    path: 'details/:id',
+    renderMode: RenderMode.Client, // Disable prerendering for this route
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender, // Prerender all other routes
   },
