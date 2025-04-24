@@ -1,5 +1,5 @@
 import { CategoriesService } from './../../core/services/categories/categories.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { ProductsService } from '../../core/services/products/products.service';
 import { IProduct } from '../../shared/interfaces/iproduct';
 import { ICategories } from '../../shared/interfaces/icategories';
@@ -35,8 +35,11 @@ export class HomeComponent implements OnInit {
   private readonly toastrService = inject(ToastrService);
   text: string = '';
 
-  products: IProduct[] = [];
-  categories: ICategories[] = [];
+  // products: IProduct[] = [];
+  products: WritableSignal<IProduct[]> = signal([])
+  // categories: ICategories[] = [];
+  categories: WritableSignal<ICategories[]> = signal([])
+
 
   customMainSlider: OwlOptions = {
     loop: true,
@@ -95,7 +98,7 @@ export class HomeComponent implements OnInit {
   getCategoriesData() {
     this.categoriesService.getAllCategories().subscribe({
       next: (res) => {
-        this.categories = res.data;
+        this.categories.set(res.data);
         console.log(this.categories);
       },
       error: (err) => {
@@ -107,7 +110,7 @@ export class HomeComponent implements OnInit {
   getProductsData() {
     this.productService.getAllProducts().subscribe({
       next: (res) => {
-        this.products = res.data;
+        this.products.set(res.data);
         console.log(this.products);
       },
       error: (err) => {
@@ -122,6 +125,7 @@ export class HomeComponent implements OnInit {
         console.log(res);
         if (res.status === 'success') {
           this.toastrService.success(res.message, 'FreshCart');
+          this.cartService.cartNumber.set(res.numOfCartItems)
         }
       },
       error: (err) => {

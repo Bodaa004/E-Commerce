@@ -22,4 +22,10 @@ export class CategoriesService {
       `https://ecommerce.routemisr.com/api/v1/categories/${id}`
     );
   }
+
+  getSubcategoriesByCategoryId(id: string): Observable<any> {
+    return this.httpClient.get(
+      `https://ecommerce.routemisr.com/api/v1/categories/${id}/subcategories`
+    );
+  }
 }

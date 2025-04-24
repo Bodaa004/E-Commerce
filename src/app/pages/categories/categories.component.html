@@ -1,1 +1,38 @@
-<p>categories works!</p>
+<section>
+  <!-- Categories Grid -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+    @for (category of categories(); track category._id) {
+    <div
+      (click)="onCategoryClick(category)"
+      class="cursor-pointer bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+    >
+      
+      <img
+        [src]="category.image"
+        [alt]="category.name"
+        class="w-full h-40 object-cover"
+      />
+      <div class="p-4 text-center">
+        <h5 class="text-lg font-semibold text-green-700">
+          {{ category.name }}
+        </h5>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="text-center mt-10">
+    <h3 class="text-xl font-bold text-green-700 mb-4">
+      {{ selectedCategoryName() }} Subcategories
+    </h3>
+    <div class="flex flex-wrap justify-center gap-3">
+      @for (sub of subcategories(); track sub._id) {
+      <button
+        class="text-sm font-medium px-4 py-2 border border-green-600 text-green-600 rounded-full hover:bg-green-600 hover:text-white transition-all"
+      >
+        {{ sub.name }}
+      </button>
+      }
+    </div>
+  </div>
+</section>

@@ -23,6 +23,7 @@ export class CarComponent implements OnInit {
       next: (res) => {
         this.cartDetails = res.data;
         console.log('Cart Items:', this.cartDetails);
+        
       },
       error: (err) => console.error('Error fetching cart:', err),
     });
@@ -33,6 +34,7 @@ export class CarComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.cartDetails = res.data;
+        this.cartService.cartNumber.set(res.numOfCartItems)
       },
       error: (err) => console.error('Error removing product:', err),
     });
@@ -55,6 +57,7 @@ export class CarComponent implements OnInit {
         console.log(res)
         if (res.message == 'success') {
           this.cartDetails = {} as ICart
+        this.cartService.cartNumber.set(0)
           
         }
       },error:(err)=>{

@@ -1,4 +1,4 @@
-<nav class="bg-gray-200 border-gray-200">
+<nav class="sticky top-0 z-50 bg-gray-200 border-b border-gray-300">
   <div
     class="max-w-screen flex flex-wrap items-center justify-between mx-auto px-4 py-2"
   >
@@ -193,10 +193,11 @@
           <a
             routerLink="/cart"
             routerLinkActive="text-green-600 "
-            class="block text-2xl py-2 px-3 rounded-sm text-gray-700"
+            class="block text-2xl py-2 px-5 rounded-sm text-gray-700"
             aria-current="page"
           >
             <i class="fas fa-cart-shopping"></i>
+            <span class="absolute bg-green-500 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm">{{countNumber()}}</span>
           </a>
         </li>
 

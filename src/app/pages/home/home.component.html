@@ -19,7 +19,7 @@
 <section>
   <h2>Popular Categories</h2>
   <owl-carousel-o [options]="customOptions">
-    @for (cat of categories; track cat._id) {
+    @for (cat of categories(); track cat._id) {
       <ng-template carouselSlide>
         <div>
           <img [src]="cat.image" class="w-full h-[250px]" alt="" />
@@ -41,7 +41,7 @@
   />
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    @for (product of products.slice(0,16) | search: text; track product.id) {
+    @for (product of products().slice(0,16) | search: text; track product.id) {
       <div class="card border border-green-400/50 rounded-md overflow-hidden shadow relative cursor-pointer">
         <div [routerLink]="['/details', product.id]">
           <div class="card-img">

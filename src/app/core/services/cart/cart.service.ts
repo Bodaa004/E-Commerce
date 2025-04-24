@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   constructor(private httpClient: HttpClient) {}
+
+  cartNumber: WritableSignal<number> = signal(0)
 
   private apiUrl = 'https://ecommerce.routemisr.com/api/v1/cart';
   myToken: any = localStorage.getItem('userToken');
@@ -24,10 +26,9 @@ export class CartService {
   }
 
   updateProductQuantity(productId: string, newCount: number): Observable<any> {
-    return this.httpClient.put(
-      `${this.apiUrl}/${productId}`,
-      { count: newCount },
-    );
+    return this.httpClient.put(`${this.apiUrl}/${productId}`, {
+      count: newCount,
+    });
   }
 
   clearCart(): Observable<any> {
